@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Data\Bar;
 use App\Data\Foo;
 use App\Service\HelloService;
+use App\Service\HelloServiceIndo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -28,8 +29,7 @@ class FooBarServiceProviderTest extends TestCase
         $hello2 = $this->app->make(HelloService::class);
 
         self::assertSame($hello1, $hello2);
-        self::assertEquals("Halo Roni", $hello1->hello('Roni' ));
+        self::assertEquals("Halo Roni", $hello1->hello('Roni'));
     }
-
 
 }
