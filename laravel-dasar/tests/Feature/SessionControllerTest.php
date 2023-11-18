@@ -8,13 +8,23 @@ use Tests\TestCase;
 
 class SessionControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
+    public function testCreateSession()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $this->get('/session/create')
+            ->assertSeeText('OK')
+            ->assertSessionHas('userId','arp')
+            ->assertSessionHas('isMember',true);
     }
+
+    public function testGetSession()
+    {
+        $this->withSession([
+            'userId'=>'arp',
+            'isMember' => true
+        ])->get('/session/get')
+            ->assertSeeText(':arp')
+            ->assertSeeText(true);
+    }
+
+
 }

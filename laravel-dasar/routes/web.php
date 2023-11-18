@@ -173,3 +173,39 @@ Route::get('/url/action', function (){
     //return url()->action([\App\Http\Controllers\FormController::class,'form'],[]);
     return \Illuminate\Support\Facades\URL::action([\App\Http\Controllers\FormController::class,'form'],[]);
 });
+
+Route::get('/session/create',[\App\Http\Controllers\SessionController::class,'createSession']);
+Route::get('/session/get',[\App\Http\Controllers\SessionController::class,'getSession']);
+
+Route::get('/error/sample', function (){
+    throw new Exception('Sample Error');
+});
+
+Route::get('/error/manual', function (){
+    report(new Exception("Sample error"));
+    return "OK";
+});
+
+Route::get('/error/validation', function (){
+    throw new \App\Exceptions\ValidationException("Validation error");
+});
+
+Route::get('/abort/400', function (){
+    abort(400, "Ups something happens!!, ga sengaja terjadi!!");
+});
+
+Route::get('/abort/401', function (){
+    abort(401,"Ups something happens!!, ga punya akses!!");
+});
+
+Route::get('/abort/402', function (){
+    abort(402,"Ups something happens!!, ga sengaja ke penceti!!");
+});
+
+Route::get('/abort/500', function (){
+    abort(500,"Ups something happens!!, ga anunya masuk!!");
+});
+
+Route::get('/abort/403', function (){
+    abort(403);
+});
